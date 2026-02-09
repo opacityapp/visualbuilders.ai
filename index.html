@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Visual Builders</title>
+    <meta
+      name="description"
+      content="You're not a coder. You're a visual builder. A movement by Opacity."
+    />
+    <meta name="theme-color" content="#f5f4f0" />
+
+    <meta property="og:title" content="Visual Builders" />
+    <meta
+      property="og:description"
+      content="You're not a coder. You're a visual builder."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://visualbuilders.ai" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <header class="nav" id="nav">
+      <div class="nav__inner">
+        <a href="#" class="nav__wordmark">Visual Builders</a>
+      </div>
+    </header>
+
+    <main>
+      <!--
+        All three videos live in one flat container so each sticky media
+        stays pinned while the next one slides up over it.
+        Z-index increases with each video so later ones stack on top.
+      -->
+      <div class="videos" id="videos">
+        <!-- Video 1 + Hero -->
+        <div class="video-block__media" data-video="1">
+          <video
+            src="/you-are-a-visual-builder.mov"
+            poster="/you-are-a-visual-builder.jpg"
+            preload="auto"
+            autoplay
+            muted
+            playsinline
+            loop
+            data-start="4"
+          ></video>
+          <div class="video-block__gradient"></div>
+          <button class="video-block__mute" aria-label="Unmute">
+            <svg
+              class="icon-muted"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+              <line x1="22" y1="9" x2="16" y2="15" />
+              <line x1="16" y1="9" x2="22" y2="15" />
+            </svg>
+          </button>
+          <div class="video-block__caption">
+            <p class="video-block__caption-title">
+              You're not a coder. You're a <em>visual builder.</em>
+            </p>
+            <p class="video-block__caption-sub">
+              A new way to think about design.
+            </p>
+          </div>
+        </div>
+        <div class="video-block__spacer"></div>
+
+        <!-- Video 2 -->
+        <div class="video-block__media" data-video="2">
+          <video
+            src="/you-are-a-visual-builder.mov"
+            poster="/you-are-a-visual-builder.jpg"
+            preload="metadata"
+            muted
+            playsinline
+            loop
+          ></video>
+          <div class="video-block__gradient"></div>
+          <button class="video-block__mute" aria-label="Unmute">
+            <svg
+              class="icon-muted"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+              <line x1="22" y1="9" x2="16" y2="15" />
+              <line x1="16" y1="9" x2="22" y2="15" />
+            </svg>
+          </button>
+          <div class="video-block__caption">
+            <p class="video-block__caption-title">Nobody Dreams in Code</p>
+            <p class="video-block__caption-sub">
+              Creation was never meant to be typed.
+            </p>
+          </div>
+        </div>
+        <div class="video-block__spacer"></div>
+
+        <!-- Video 3 -->
+        <div class="video-block__media" data-video="3">
+          <video
+            src="/you-are-a-visual-builder.mov"
+            poster="/you-are-a-visual-builder.jpg"
+            preload="metadata"
+            muted
+            playsinline
+            loop
+          ></video>
+          <div class="video-block__gradient"></div>
+          <button class="video-block__mute" aria-label="Unmute">
+            <svg
+              class="icon-muted"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+              <line x1="22" y1="9" x2="16" y2="15" />
+              <line x1="16" y1="9" x2="22" y2="15" />
+            </svg>
+          </button>
+          <div class="video-block__caption">
+            <p class="video-block__caption-title">The Ones Who See It</p>
+            <p class="video-block__caption-sub">
+              For the builders who refused to wait.
+            </p>
+          </div>
+        </div>
+        <div class="video-block__spacer"></div>
+      </div>
+
+      <!-- Community -->
+      <section class="community" id="community">
+        <div class="community__inner">
+          <h2 class="community__headline">Are you a Visual Builder?</h2>
+          <p class="community__description">
+            Declare yourself. Join the movement.
+          </p>
+          <div class="community__hats">
+            <div class="community__hats-row">
+              <a
+                href="https://opacity-shop.fourthwall.com"
+                target="_blank"
+                rel="noopener"
+                class="community__hat-link"
+              >
+                <img
+                  src="hat-brown.png"
+                  alt="Visual Builders hat — brown"
+                  class="community__hat-img"
+                />
+              </a>
+              <a
+                href="https://opacity-shop.fourthwall.com"
+                target="_blank"
+                rel="noopener"
+                class="community__hat-link"
+              >
+                <img
+                  src="hat-blue.png"
+                  alt="Visual Builders hat — blue"
+                  class="community__hat-img"
+                />
+              </a>
+            </div>
+          </div>
+          <p class="community__hats-label">
+            Grab a hat. They're real, and they're fun.
+          </p>
+          <form class="community__form" id="supporter-form">
+            <div class="community__input-group">
+              <span class="community__at">@</span>
+              <input
+                type="text"
+                class="community__input"
+                id="handle-input"
+                placeholder="your X handle"
+                required
+                aria-label="X handle"
+                maxlength="15"
+                pattern="[A-Za-z0-9_]+"
+              />
+            </div>
+            <button type="submit" class="community__submit">I'm In</button>
+          </form>
+          <p class="community__count" id="supporter-count"></p>
+          <div class="community__grid-wrapper" id="supporters-grid-wrapper">
+            <div class="community__grid" id="supporters-grid"></div>
+          </div>
+          <button
+            class="community__show-all"
+            id="supporters-show-all"
+            style="display: none"
+          >
+            Show all
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer__top">
+        <h2 class="footer__headline">Visually build and ship real software.</h2>
+        <p class="footer__description">
+          Ready to see what visual building really looks like?
+        </p>
+        <a
+          href="https://opacity.com"
+          target="_blank"
+          rel="noopener"
+          class="footer__cta"
+        >
+          Learn more @ opacity.com
+        </a>
+      </div>
+      <div class="footer__inner">
+        <p class="footer__tagline">
+          A movement by
+          <a href="https://opacity.com" target="_blank" rel="noopener"
+            >Opacity</a
+          >
+        </p>
+        <p class="footer__copy">&copy; 2025 Opacity Software Inc.</p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

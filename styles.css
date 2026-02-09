@@ -1,0 +1,611 @@
+/* ========================================
+   Visual Builders — styles.css
+   ======================================== */
+
+:root {
+  --color-bg: #f5f4f0;
+  --color-bg-alt: #eceae4;
+  --color-text: #111111;
+  --color-text-secondary: #555555;
+  --color-text-tertiary: #888888;
+  --color-border: rgba(0, 0, 0, 0.06);
+
+  --font-display: "Instrument Serif", Georgia, serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.8125rem);
+  --text-sm: clamp(0.8125rem, 0.75rem + 0.3vw, 0.9375rem);
+  --text-base: clamp(0.9375rem, 0.875rem + 0.3vw, 1.0625rem);
+  --text-lg: clamp(1.125rem, 1rem + 0.6vw, 1.375rem);
+  --text-xl: clamp(1.375rem, 1.1rem + 1.2vw, 2rem);
+  --text-2xl: clamp(1.75rem, 1.3rem + 2vw, 3rem);
+  --text-3xl: clamp(2.25rem, 1.5rem + 3.5vw, 4rem);
+  --text-hero: clamp(2.75rem, 1.5rem + 5.5vw, 6rem);
+
+  --space-sm: clamp(0.5rem, 0.4rem + 0.5vw, 0.75rem);
+  --space-md: clamp(1rem, 0.8rem + 1vw, 1.5rem);
+  --space-lg: clamp(2rem, 1.5rem + 2vw, 3rem);
+  --space-xl: clamp(3rem, 2rem + 4vw, 6rem);
+  --space-2xl: clamp(5rem, 3rem + 6vw, 10rem);
+
+  --page-padding: clamp(1.25rem, 1rem + 2vw, 4rem);
+  --nav-height: 100px;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 200ms;
+  --duration-normal: 500ms;
+  --duration-slow: 800ms;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-full: 9999px;
+}
+
+/* ========== Reset ========== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+
+input {
+  border: none;
+  background: none;
+  font: inherit;
+  color: inherit;
+  outline: none;
+}
+
+/* ========== Navigation ========== */
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition:
+    background-color 0.4s ease,
+    border-color 0.4s ease;
+}
+
+.nav--scrolled {
+  background: transparent;
+}
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--nav-height);
+  padding: 0 var(--page-padding);
+}
+
+.nav__wordmark {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  letter-spacing: -0.01em;
+  color: #ffffff;
+  transition: color 0.4s ease;
+}
+
+.nav--scrolled .nav__wordmark {
+  color: var(--color-text);
+}
+
+/* ========== Video Blocks (shared container, stacking sticky) ========== */
+
+/*
+  All three videos are direct children of .videos so they share
+  the same sticky containing block. Each stays pinned at top:0
+  while the next one slides up over it. Z-index increases per video.
+*/
+
+.videos {
+  position: relative;
+}
+
+.video-block__media {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background: #1a1a1a;
+  opacity: 1;
+  will-change: transform, opacity;
+}
+
+/* Later videos stack on top of earlier ones */
+[data-video="1"] {
+  z-index: 1;
+}
+[data-video="2"] {
+  z-index: 2;
+}
+[data-video="3"] {
+  z-index: 3;
+}
+
+.video-block__media video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-block__gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.4) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.video-block__mute {
+  position: absolute;
+  bottom: clamp(2rem, 4vw, 4rem);
+  left: clamp(2rem, 4vw, 4rem);
+  z-index: 3;
+  width: 36px;
+  height: 36px;
+  color: #fff;
+  transition: color var(--duration-fast) ease;
+}
+
+.video-block__mute svg {
+  width: 100%;
+  height: 100%;
+}
+
+.video-block__mute .icon-unmuted {
+  display: none;
+}
+
+.video-block__mute.is-unmuted .icon-muted {
+  display: none;
+}
+
+.video-block__mute.is-unmuted .icon-unmuted {
+  display: block;
+}
+
+/* Video caption: pinned at bottom-right of each video */
+.video-block__caption {
+  position: absolute;
+  bottom: clamp(2rem, 4vw, 4rem);
+  right: clamp(2rem, 4vw, 4rem);
+  text-align: right;
+  color: #ffffff;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.video-block__caption-title {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.video-block__caption-title em {
+  font-style: italic;
+}
+
+.video-block__caption-sub {
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 0.25em;
+}
+
+/* Scroll spacer between videos */
+.video-block__spacer {
+  height: 100vh;
+}
+
+/* Card-shrink + caption fade driven by JS in script.js */
+
+/* Custom minimal player bar — appears when user clicks unmute */
+.video-player-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px clamp(1.5rem, 3vw, 3rem);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.video-player-bar.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.video-player-bar__btn {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: rgba(255, 255, 255, 0.8);
+  transition: color var(--duration-fast) ease;
+}
+
+.video-player-bar__btn:hover {
+  color: #ffffff;
+}
+
+.video-player-bar__btn svg {
+  width: 100%;
+  height: 100%;
+}
+
+.video-player-bar__scrubber {
+  flex: 1;
+  position: relative;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.video-player-bar__track {
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.video-player-bar__progress {
+  height: 100%;
+  background: #ffffff;
+  border-radius: 2px;
+  width: 0%;
+  transition: none;
+}
+
+.video-player-bar__scrubber:hover .video-player-bar__track {
+  height: 5px;
+}
+
+.video-player-bar__time {
+  flex-shrink: 0;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.02em;
+  min-width: 70px;
+}
+
+/* ========== Community ========== */
+
+.community {
+  background: var(--color-bg-alt);
+  padding: var(--space-2xl) var(--page-padding);
+  text-align: center;
+}
+
+.community__inner {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.community__headline {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-sm);
+}
+
+.community__description {
+  font-size: var(--text-lg);
+  color: var(--color-text-secondary);
+}
+
+.community__hats-label {
+  font-size: var(--text-sm);
+  color: var(--color-text-tertiary);
+  margin-bottom: var(--space-md);
+}
+
+.community__hats-row {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-lg);
+}
+
+.community__hat-link {
+  display: flex;
+  max-width: 150px;
+  transition: transform var(--duration-fast) ease;
+}
+
+.community__hat-link:hover {
+  transform: scale(1.05);
+}
+
+.community__hat-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+}
+
+.community__form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.community__input-group {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  padding: 0.6em 1em;
+  background: var(--color-bg);
+  transition: border-color var(--duration-fast) ease;
+}
+
+.community__input-group:focus-within {
+  border-color: var(--color-text);
+}
+
+.community__at {
+  color: var(--color-text-tertiary);
+  font-size: var(--text-sm);
+  margin-right: 0.25em;
+  user-select: none;
+}
+
+.community__input {
+  font-size: var(--text-sm);
+  width: 160px;
+}
+
+.community__input::placeholder {
+  color: var(--color-text-tertiary);
+}
+
+.community__submit {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  padding: 0.6em 1.5em;
+  background: var(--color-text);
+  color: var(--color-bg);
+  border-radius: var(--radius-full);
+  transition: opacity var(--duration-fast) ease;
+}
+
+.community__submit:hover {
+  opacity: 0.8;
+}
+
+.community__count {
+  font-size: var(--text-sm);
+  color: var(--color-text-tertiary);
+  margin-bottom: var(--space-lg);
+}
+
+.community__grid-wrapper {
+  max-height: 70vh;
+  overflow: hidden;
+  position: relative;
+  transition: max-height 0.5s ease;
+}
+
+.community__grid-wrapper.is-expanded {
+  max-height: none;
+}
+
+.community__grid-wrapper.is-overflowing:not(.is-expanded)::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(to top, var(--color-bg-alt) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+.community__show-all {
+  margin-top: var(--space-lg);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  padding: 0.6em 1.5em;
+  background: var(--color-text);
+  color: var(--color-bg);
+  border-radius: var(--radius-full);
+  transition: opacity var(--duration-fast) ease;
+}
+
+.community__show-all:hover {
+  opacity: 0.8;
+}
+
+.community__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: var(--space-md);
+}
+
+.supporter-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: var(--space-md) var(--space-sm);
+}
+
+.supporter-card__avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--color-bg-alt);
+  object-fit: cover;
+}
+
+.supporter-card__handle {
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+  transition: color var(--duration-fast) ease;
+}
+
+.supporter-card:hover .supporter-card__handle {
+  color: var(--color-text);
+}
+
+/* ========== Footer ========== */
+
+.footer__top {
+  text-align: center;
+  padding: var(--page-padding);
+}
+
+.footer__headline {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-sm);
+}
+
+.footer__description {
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  margin-bottom: var(--space-lg);
+}
+
+.footer__cta {
+  display: inline-block;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  padding: 0.75em 2em;
+  background: var(--color-text);
+  color: var(--color-bg);
+  border-radius: var(--radius-full);
+  transition: opacity var(--duration-fast) ease;
+}
+
+.footer__cta:hover {
+  opacity: 0.8;
+}
+
+.footer {
+  border-top: 1px solid var(--color-border);
+  padding: var(--space-xl) var(--page-padding);
+}
+
+.footer__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--page-padding);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+
+.footer__tagline {
+  font-size: var(--text-sm);
+  color: var(--color-text-tertiary);
+}
+
+.footer__tagline a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.footer__tagline a:hover {
+  color: var(--color-text);
+}
+
+.footer__copy {
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+}
+
+/* ========== Responsive ========== */
+
+@media (max-width: 640px) {
+  .community__form {
+    flex-direction: column;
+  }
+
+  .community__input {
+    width: 200px;
+  }
+
+  .community__grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: var(--space-sm);
+  }
+
+  .footer__inner {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* ========== Reduced Motion ========== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
