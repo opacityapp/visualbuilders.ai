@@ -351,7 +351,7 @@ input {
 .community__hats-label {
   font-size: var(--text-sm);
   color: var(--color-text-tertiary);
-  margin-bottom: var(--space-md);
+  margin-top: var(--space-md);
 }
 
 .community__hats-row {
@@ -362,7 +362,7 @@ input {
 
 .community__hat-link {
   display: flex;
-  max-width: 150px;
+  max-width: 170px;
   transition: transform var(--duration-fast) ease;
 }
 
